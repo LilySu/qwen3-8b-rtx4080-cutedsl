@@ -10,7 +10,11 @@ This is a ground-up implementation of the full Qwen3-8B model — no HuggingFace
 
 The goal is not just a fast inference engine — it's to build a working understanding of each optimization by going through the bottleneck removal process manually, measuring the effect at every step, and documenting what the hardware was actually doing.
 
-**Stack:** Python · PyTorch · [NVIDIA CuteDSL](https://github.com/NVIDIA/cutlass) · fastokens · safetensors
+Tokenization uses [fastokens](https://github.com/nreHieW/fastokens), a Rust-backed tokenizer that loads `tokenizer.json` directly without a Python tokenizer dependency. It is compatible with Python 3.9+ via the `abi3` wheel and handles Qwen3's ChatML chat template and special tokens natively.
+
+The CuteDSL kernel strategy is informed by [quack](https://github.com/Dao-AILab/quack) (Tri Dao's CuteDSL kernel library), analyzed carefully for what transfers to SM89 vs. what is SM90+ only. quack targets H100/B200 and uses TMA, WGMMA, clusters, and mbarrier pipelines — none of which exist on SM89. What is used from it: the `cute_tensor_indexing` helper for cleaner slice syntax, the `warp_reduce`/`block_reduce` patterns (copied inline), and `layout_utils.py` for the MMA accumulator retiling and register permutation patterns needed for the epilogue store path. The full breakdown is in [CUTEDSL_STRATEGY.md](CUTEDSL_STRATEGY.md).
+
+**Stack:** Python · PyTorch · [NVIDIA CuteDSL](https://github.com/NVIDIA/cutlass) · [fastokens](https://github.com/nreHieW/fastokens) · safetensors
 
 ---
 
