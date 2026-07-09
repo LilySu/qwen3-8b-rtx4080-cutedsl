@@ -1,0 +1,42 @@
+# Model weights — never upload large binaries
+weights/
+*.safetensors
+*.bin
+*.pt
+*.pth
+
+# HuggingFace cache
+.cache/
+huggingface/
+
+# Private work — not part of this repo
+cutelearning/
+
+# Python
+__pycache__/
+*.pyc
+*.pyo
+.venv/
+venv/
+*.egg-info/
+
+# Env / secrets
+.env
+*.env
+
+# Nsight Compute binary reports — open on Windows, not tracked
+profiles/*.ncu-rep
+profiles/*.sqlite
+
+# Bench result JSONs are tracked; leave bench/results/ unignored
+
+# CuteDSL kernel cache
+.cache/cutedsl/
+
+# Editor
+.vscode/
+.idea/
+
+# WSL zone identifier sidecar files
+*.Zone.Identifier
+*:Zone.Identifier
