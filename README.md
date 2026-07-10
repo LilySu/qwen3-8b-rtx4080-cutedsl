@@ -102,6 +102,11 @@ The rule system:
 
 ---
 
+## Project reference docs
+
+The root-level project notes have been consolidated into a single indexable reference:
+- [qwen3_sm89_cutedsl_strategy_iterations_speedups_and_research_reference.md](qwen3_sm89_cutedsl_strategy_iterations_speedups_and_research_reference.md)
+
 ## Getting started
 
 ```bash
