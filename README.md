@@ -123,6 +123,22 @@ python bench/runner.py
 
 # benchmark a specific kernel
 python bench/runner.py --kernels rope --regime decode
+
+# profile inference with NVIDIA GenAI-Perf / AIPerf against a local endpoint
+python bench/genai_perf.py --serve-local --weights weights --client genai-perf \
+  --input-tokens 256 --output-tokens 128 --num-prompts 32
+
+# or benchmark an existing OpenAI-compatible endpoint
+python bench/genai_perf.py --endpoint http://127.0.0.1:8000/v1/chat/completions \
+  --client aiperf --input-tokens 256 --output-tokens 128 --num-prompts 32
+
+# run the same benchmark inside the cutelearning:dev container
+docker run --rm -v "$(pwd):/workspace" cutelearning:dev bash -lc \
+  'cd /workspace && python bench/genai_perf.py --serve-local --weights weights --client genai-perf --input-tokens 256 --output-tokens 128 --num-prompts 32'
+
+# dry-run the container benchmark command without launching inference
+docker run --rm -v "$(pwd):/workspace" cutelearning:dev bash -lc \
+  'cd /workspace && python bench/genai_perf.py --serve-local --weights weights --client genai-perf --input-tokens 64 --output-tokens 32 --num-prompts 2 --dry-run'
 ```
 
 ---
