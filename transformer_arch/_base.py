@@ -43,10 +43,22 @@ class Metrics:
         }
 
 
-# SM89 RTX 4080 Laptop measured peaks — update with measure_peaks.py output
-SM89_PEAK_BW_GBS: float = 432.0    # theoretical; measured ~390-410
-SM89_PEAK_BF16_TFLOPS: float = 165.0  # measured; FP32-accum half-rate = ~82 TFLOPS effective
-SM89_PEAK_INT8_TOPS: float = 330.0
+# SM89 RTX 4080 Laptop empirical peaks (measured by bench/measure_peaks.py at laptop TGP)
+# Update these constants after running measure_peaks.py on a stable thermal state.
+# Theoretical specs: 432 GB/s BW, 165 TFLOPS BF16 — both are for desktop TDP, not laptop.
+SM89_PEAK_BW_GBS: float = 380.0       # empirical; theoretical 432
+SM89_PEAK_BF16_TFLOPS: float = 57.5   # empirical at laptop TGP; theoretical 165 (FP32-accum half-rate = ~82 effective on desktop)
+SM89_PEAK_INT8_TOPS: float = 115.0    # estimated: 2× BF16 on SM89 tensor cores
+
+
+def get_gpu_info() -> dict:
+    props = torch.cuda.get_device_properties(0)
+    return {
+        "name": props.name,
+        "vram_gb": round(props.total_memory / 1e9, 1),
+        "sm_count": props.multi_processor_count,
+        "cuda_capability": f"{props.major}.{props.minor}",
+    }
 
 
 def cuda_time_us(fn: Callable, warmup: int, iters: int) -> float:
