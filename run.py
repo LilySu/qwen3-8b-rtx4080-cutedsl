@@ -11,7 +11,7 @@ from pathlib import Path
 
 import torch
 
-from model import load_from_hf_dir
+from baseline import load_from_hf_dir
 from tokenizer import Qwen3Tokenizer
 
 

@@ -8,11 +8,11 @@ Usage:
 
 Kernel short names map to directories in order of first appearance in the
 Qwen3-8B forward pass:
-  rmsnorm   → kernels/01_rmsnorm/   (ln1, qk-norm, ln2, final norm)
-  gemm      → kernels/02_gemm/      (q/k/v proj, o_proj, lm_head)
-  rope      → kernels/03_rope/
-  attention → kernels/04_attention/
-  mlp       → kernels/05_mlp/       (gate/up/down projections fused)
+  rmsnorm   → transformer_arch/01_rmsnorm/   (ln1, qk-norm, ln2, final norm)
+  gemm      → transformer_arch/02_gemm/      (q/k/v proj, o_proj, lm_head)
+  rope      → transformer_arch/03_rope/
+  attention → transformer_arch/04_attention/
+  mlp       → transformer_arch/05_mlp/       (gate/up/down projections fused)
 
 Output:
   bench/results/<kernel>_<timestamp>.json     (machine-readable)
@@ -34,7 +34,7 @@ import torch
 # make repo root importable
 sys.path.insert(0, str(Path(__file__).parent.parent))
 
-from kernels._base import SM89_PEAK_BW_GBS, SM89_PEAK_BF16_TFLOPS
+from transformer_arch._base import SM89_PEAK_BW_GBS, SM89_PEAK_BF16_TFLOPS
 
 RESULTS_DIR = Path(__file__).parent / "results"
 DEVICE = torch.device("cuda")
@@ -136,7 +136,7 @@ def _discover_versions(short_name: str):
     """
     import importlib.util
     dir_name = KERNELS[short_name]
-    kernel_dir = Path(__file__).parent.parent / "kernels" / dir_name
+    kernel_dir = Path(__file__).parent.parent / "transformer_arch" / dir_name
     versions = []
     for f in sorted(f for f in kernel_dir.glob("*.py")
                     if not f.name.startswith("_") and "_v" in f.name):

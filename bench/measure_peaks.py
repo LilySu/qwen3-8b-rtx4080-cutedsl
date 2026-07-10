@@ -7,7 +7,7 @@ Run this ONCE after establishing a stable thermal/power state:
   python bench/measure_peaks.py
 
 Writes bench/results/peaks_<timestamp>.json and prints a table.
-These measured values should replace the theoretical constants in kernels/_base.py.
+These measured values should replace the theoretical constants in transformer_arch/_base.py.
 
 Measures:
   1. DRAM bandwidth — copy large tensor
@@ -24,7 +24,7 @@ from pathlib import Path
 import torch
 
 sys.path.insert(0, str(Path(__file__).parent.parent))
-from kernels._base import cuda_time_us
+from transformer_arch._base import cuda_time_us
 
 RESULTS_DIR = Path(__file__).parent / "results"
 DEVICE = torch.device("cuda")
@@ -95,7 +95,7 @@ def main():
         json.dump(results, f, indent=2)
     print(f"\nSaved → {out}")
     print()
-    print("Update SM89_PEAK_BW_GBS and SM89_PEAK_BF16_TFLOPS in kernels/_base.py with these values.")
+    print("Update SM89_PEAK_BW_GBS and SM89_PEAK_BF16_TFLOPS in transformer_arch/_base.py with these values.")
 
 
 if __name__ == "__main__":

@@ -6,7 +6,7 @@ the benchmark harness can compare it against future CuteDSL versions.
 """
 from __future__ import annotations
 import torch
-from kernels._base import Metrics, SM89_PEAK_BW_GBS, cuda_time_us
+from transformer_arch._base import Metrics, SM89_PEAK_BW_GBS, cuda_time_us
 
 NAME = "v0_pytorch"
 KERNEL = "complex64 multiply via view_as_complex"

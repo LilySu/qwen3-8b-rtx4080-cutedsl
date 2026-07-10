@@ -13,7 +13,7 @@ from __future__ import annotations
 import math
 import torch
 import torch.nn.functional as F
-from kernels._base import Metrics, SM89_PEAK_BW_GBS, cuda_time_us
+from transformer_arch._base import Metrics, SM89_PEAK_BW_GBS, cuda_time_us
 
 NAME = "v0_pytorch"
 KERNEL = "F.scaled_dot_product_attention with repeat_interleave GQA"

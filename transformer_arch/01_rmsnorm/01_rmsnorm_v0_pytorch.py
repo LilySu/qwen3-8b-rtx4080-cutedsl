@@ -9,7 +9,7 @@ Shapes exercised:
 from __future__ import annotations
 import torch
 import torch.nn.functional as F
-from kernels._base import Metrics, SM89_PEAK_BW_GBS, cuda_time_us
+from transformer_arch._base import Metrics, SM89_PEAK_BW_GBS, cuda_time_us
 
 NAME = "v0_pytorch"
 KERNEL = "rsqrt + multiply in FP32, cast result"

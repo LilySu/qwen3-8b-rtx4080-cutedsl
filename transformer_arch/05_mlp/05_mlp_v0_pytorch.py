@@ -11,7 +11,7 @@ Total FLOPs per token: 2 × (4096×12288 + 4096×12288 + 12288×4096) = 3 × 2MN
 from __future__ import annotations
 import torch
 import torch.nn.functional as F
-from kernels._base import Metrics, SM89_PEAK_BW_GBS, SM89_PEAK_BF16_TFLOPS, cuda_time_us
+from transformer_arch._base import Metrics, SM89_PEAK_BW_GBS, SM89_PEAK_BF16_TFLOPS, cuda_time_us
 
 NAME = "v0_pytorch"
 KERNEL = "silu(gate) * up → down, three separate matmuls"

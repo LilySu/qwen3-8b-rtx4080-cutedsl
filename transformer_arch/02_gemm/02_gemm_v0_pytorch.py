@@ -20,7 +20,7 @@ We benchmark both regimes.
 """
 from __future__ import annotations
 import torch
-from kernels._base import Metrics, SM89_PEAK_BW_GBS, SM89_PEAK_BF16_TFLOPS, cuda_time_us
+from transformer_arch._base import Metrics, SM89_PEAK_BW_GBS, SM89_PEAK_BF16_TFLOPS, cuda_time_us
 
 NAME = "v0_pytorch"
 KERNEL = "torch.matmul → cuBLAS"

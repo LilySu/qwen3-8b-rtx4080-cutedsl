@@ -14,14 +14,14 @@ WEIGHTS_DIR = "weights"
 
 # ── 1. Imports ────────────────────────────────────────────────────────────────
 print("1. imports ...", end=" ", flush=True)
-from model.config import Qwen3Config
-from model.norm import RMSNorm
-from model.rope import precompute_freqs_cis, apply_rotary_emb
-from model.mlp import MLP
-from model.attention import Attention
-from model.block import Block
-from model.qwen3 import Qwen3
-from model.loader import _map_key
+from baseline.config import Qwen3Config
+from baseline.norm import RMSNorm
+from baseline.rope import precompute_freqs_cis, apply_rotary_emb
+from baseline.mlp import MLP
+from baseline.attention import Attention
+from baseline.block import Block
+from baseline.qwen3 import Qwen3
+from baseline.loader import _map_key
 print("OK")
 
 # ── 2. Tiny model forward pass ────────────────────────────────────────────────
