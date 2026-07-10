@@ -138,7 +138,8 @@ def _discover_versions(short_name: str):
     dir_name = KERNELS[short_name]
     kernel_dir = Path(__file__).parent.parent / "kernels" / dir_name
     versions = []
-    for f in sorted(kernel_dir.glob("v*.py")):
+    for f in sorted(f for f in kernel_dir.glob("*.py")
+                    if not f.name.startswith("_") and "_v" in f.name):
         spec = importlib.util.spec_from_file_location(
             f"kernels__{dir_name}__{f.stem}", f
         )
